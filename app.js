@@ -1,6 +1,6 @@
 const newsService = (function () {
   const API_KEY = '9ef210caa5c54a349285000aa253dbd9',
-    API_URL = 'http://newsapi.org/v2';
+    API_URL = 'https://newsapi.org/v2';
 
   return {
     async topHeadlines(country = 'ru', category = 'general') {

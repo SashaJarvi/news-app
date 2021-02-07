@@ -4,8 +4,10 @@ const newsService = (function () {
 
   return {
     async topHeadlines(country = 'ru', category = 'general') {
+      const req = new Request(`${API_URL}/top-headlines?country=${country}&category=${category}&apiKey=${API_KEY}`);
+
       try {
-        return await fetch(`${API_URL}/top-headlines?country=${country}&category=${category}&apiKey=${API_KEY}`)
+        return await fetch(req)
           .then(response => response.json())
           .then(response => onGetResponse(response));
       } catch (e) {
@@ -13,8 +15,10 @@ const newsService = (function () {
       }
     },
     async everything(query) {
+      const req = new Request(`${API_URL}/everything?q=${query}&apiKey=${API_KEY}`);
+
       try {
-        return await fetch(`${API_URL}/everything?q=${query}&apiKey=${API_KEY}`)
+        return await fetch(req)
           .then(response => response.json())
           .then(response => onGetResponse(response));
       } catch (e) {
@@ -36,7 +40,7 @@ form.addEventListener('submit', e => {
 });
 
 // init selects
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   M.AutoInit();
   loadNews()
 });
@@ -92,28 +96,28 @@ function renderNews(news) {
 }
 
 // news item template function
-function newsTemplate({ urlToImage, title, url, description }) {
+function newsTemplate({urlToImage, title, url, description}) {
 
   return `
     <div class="card-wrapper col s12 m6">
-        <div class="card">
-            <div class="card-image">
-                <img src="${urlToImage || './images/news-dummy.jpg'}" alt="">
-                <span class="card-title">${title || ''}</span>
-            </div>
-            <div class="card-content">
-                <p>${description || ''}</p>
-            </div>
-            <div class="card-action">
-                <a href="${url}" target="_blank">Read More</a>
-            </div>
+      <div class="card">
+        <div class="card-image">
+          <img src="${urlToImage || './images/news-dummy.jpg'}" alt="">
+          <span class="card-title">${title || ''}</span>
         </div>
+        <div class="card-content">
+          <p>${description || ''}</p>
+        </div>
+        <div class="card-action">
+          <a href="${url}" target="_blank">Read More</a>
+        </div>
+      </div>
     </div>
   `;
 }
 
 function showAlert(msg, type = 'error-msg') {
-  M.toast({ html: msg, classes: type, displayLength: 2500 })
+  M.toast({html: msg, classes: type, displayLength: 2500})
 }
 
 // clear container before adding new news items

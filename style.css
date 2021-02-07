@@ -1,3 +1,13 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
 a {
   color: inherit;
   text-decoration: inherit;
@@ -67,13 +77,14 @@ a {
 }
 
 .card .card-image .card-title {
+  max-height: 92px;
+  width: 100%;
   padding: 10px 20px;
-  display: -webkit-box;
 
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-
+  text-overflow: ellipsis;
+  line-height: 1.6;
   overflow: hidden;
+
 }
 
 .copyright {
